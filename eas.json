@@ -15,7 +15,7 @@
     "preview": {
       "distribution": "internal",
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://lr.ronohub.com",
+        "EXPO_PUBLIC_API_URL": "https://ronolr.com",
         "EXPO_PUBLIC_ENV": "preview"
       },
       "android": {
@@ -24,7 +24,7 @@
     },
     "production": {
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://lr.ronohub.com",
+        "EXPO_PUBLIC_API_URL": "https://ronolr.com",
         "EXPO_PUBLIC_ENV": "production"
       },
       "android": {
@@ -38,9 +38,9 @@
   "submit": {
     "production": {
       "ios": {
-        "appleId": "your-apple-id@email.com",
-        "ascAppId": "your-app-store-connect-app-id",
-        "appleTeamId": "your-apple-team-id"
+        "appleId": "rayudugroup01@gmail.com",
+        "ascAppId": "6800067207",
+        "appleTeamId": "MK5YWWRN57"
       },
       "android": {
         "serviceAccountKeyPath": "./service-account-key.json",

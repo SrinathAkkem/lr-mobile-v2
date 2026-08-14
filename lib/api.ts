@@ -427,7 +427,7 @@ async function request<T>(
 export const api = {
   sendOtp: (
     mobile: string,
-    options?: { purpose?: "login" | "profile_update" },
+    options?: { purpose?: "login" | "profile_update" | "register" },
   ) =>
     request<{ message: string; devOtp?: string; smsSent?: boolean }>(
       "/api/auth/send-otp",
@@ -451,6 +451,46 @@ export const api = {
       },
       true,
       AUTH_TIMEOUT
+    ),
+
+  sendEmailOtp: (email: string) =>
+    request<{ message: string; devOtp?: string; emailSent?: boolean }>(
+      "/api/auth/send-email-otp",
+      {
+        method: "POST",
+        body: JSON.stringify({ email: email.trim().toLowerCase() }),
+      },
+      true,
+      AUTH_TIMEOUT,
+    ),
+
+  registerCompany: (body: {
+    name: string;
+    lrCode: string;
+    gstNumber: string;
+    ibaNumber?: string;
+    contactPhone: string;
+    email: string;
+    address: string;
+    mobileOtp: string;
+  }) =>
+    request<{
+      token: string;
+      user: import("../types").User;
+      company: import("../types").Company;
+    }>(
+      "/api/public/company-registration",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          ...body,
+          lrCode: body.lrCode.trim(),
+          email: body.email.trim().toLowerCase(),
+          ibaNumber: body.ibaNumber?.trim() || undefined,
+        }),
+      },
+      true,
+      AUTH_TIMEOUT,
     ),
 
   logout: () => {

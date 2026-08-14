@@ -13,8 +13,9 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.ronohub.lr.v2",
-      "buildNumber": "1",
+      "buildNumber": "3",
       "infoPlist": {
+        "CFBundleDisplayName": "Rono LR",
         "ITSAppUsesNonExemptEncryption": false,
         "NSCameraUsageDescription": "This app needs access to your camera to take photos of goods for LR documentation.",
         "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to select photos of goods for LR documentation.",
@@ -23,11 +24,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/icon.png"
       },
       "package": "com.ronohub.lr.v2",
-      "versionCode": 1,
+      "versionCode": 3,
       "softwareKeyboardLayoutMode": "resize",
       "permissions": [
         "android.permission.CAMERA",
@@ -40,16 +40,15 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/rono_logo.png",
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "image": "./assets/icon.png",
+          "resizeMode": "contain"
         }
       ],
       "expo-secure-store",
@@ -90,12 +89,12 @@
         "origin": false
       },
       "eas": {
-        "projectId": "3a95b1ba-39ff-444e-83c8-20c26c0c5073"
+        "projectId": "3ffd9123-56ed-4ae5-8c4e-7d733412c974"
       }
     },
-    "owner": "srinathakkem",
+    "owner": "ronohub",
     "updates": {
-      "url": "https://u.expo.dev/3a95b1ba-39ff-444e-83c8-20c26c0c5073"
+      "url": "https://u.expo.dev/3ffd9123-56ed-4ae5-8c4e-7d733412c974"
     },
     "runtimeVersion": {
       "policy": "appVersion"

@@ -1,4 +1,4 @@
-# RonoHub LR Mobile V2
+# Rono LR Mobile V2
 
 Production-grade React Native mobile application for managing Lorry Receipts (LR), built with Expo and TypeScript.
 

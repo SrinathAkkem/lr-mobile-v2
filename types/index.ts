@@ -10,7 +10,7 @@ export interface User {
   branchId: string | null;
   mobile: string;
   status?: "active" | "inactive" | "invited";
-  company?: { id: string; name: string; lrCode?: string };
+  company?: { id: string; name: string; lrCode?: string; status?: "pending" | "active" | "suspended" };
   branch?: { id: string; name: string; city: string };
 }
 
@@ -26,7 +26,7 @@ export interface Company {
   maxBranches: number;
   maxExecutives: number;
   maxLrPerMonth: number;
-  status: "active" | "suspended";
+  status: "pending" | "active" | "suspended";
 }
 
 export interface DashboardStats {

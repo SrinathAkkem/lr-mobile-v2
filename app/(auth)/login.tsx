@@ -11,16 +11,19 @@ import {
   ScrollView,
   ActivityIndicator,
 } from "react-native";
-import { Redirect } from "expo-router";
+import { Redirect, router, useLocalSearchParams, type Href } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { useAuth, getLastFirstName } from "../../lib/auth";
 import { RonoLogo } from "../../components/RonoLogo";
+import { AuthLinkRow, LegalFooter } from "../../components/auth/LegalFooter";
 import { FONTS } from "../../constants/fonts";
+import { AUTH_COLORS } from "../../components/auth/authStyles";
 
 export default function LoginScreenV2() {
   const { sendOtp, login, user } = useAuth();
+  const params = useLocalSearchParams<{ mobile?: string }>();
   const [mobile, setMobile] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
@@ -39,6 +42,13 @@ export default function LoginScreenV2() {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, []);
+
+  useEffect(() => {
+    const prefill = params.mobile;
+    if (prefill && /^\d{10}$/.test(prefill)) {
+      setMobile(prefill);
+    }
+  }, [params.mobile]);
 
   useEffect(() => {
     if (user) {
@@ -81,7 +91,7 @@ export default function LoginScreenV2() {
         Alert.alert(
           "Dev OTP",
           `SMS not configured — use OTP: ${res.devOtp}`,
-          [{ text: "OK" }]
+          [{ text: "OK" }],
         );
       }
     } else {
@@ -112,7 +122,6 @@ export default function LoginScreenV2() {
       Alert.alert("Invalid OTP", res.error ?? "Please re-enter the code.");
       setOtp("");
       otpInputRef.current?.focus();
-      return;
     }
   }
 
@@ -128,7 +137,7 @@ export default function LoginScreenV2() {
         Alert.alert(
           "Dev OTP",
           `SMS not configured — use OTP: ${res.devOtp}`,
-          [{ text: "OK" }]
+          [{ text: "OK" }],
         );
       }
     } else {
@@ -187,7 +196,7 @@ export default function LoginScreenV2() {
                   disabled={busy || otpSent}
                 >
                   {sendingOtp ? (
-                    <ActivityIndicator color="#5B21B6" size="small" />
+                    <ActivityIndicator color={AUTH_COLORS.purple} size="small" />
                   ) : (
                     <Text
                       style={[styles.sendOtpText, otpSent && styles.sendOtpDisabled]}
@@ -241,14 +250,16 @@ export default function LoginScreenV2() {
                 </TouchableOpacity>
               )}
             </View>
+
+            <AuthLinkRow
+              prefix="New user?"
+              linkLabel="Register Now"
+              onPress={() => router.push("/(auth)/register" as Href)}
+            />
           </View>
 
           <View style={styles.termsContainer}>
-            <Text style={styles.termsText}>
-              By continuing, you agree to our{" "}
-              <Text style={styles.termsLink}>Terms of Use</Text> and{" "}
-              <Text style={styles.termsLink}>Privacy Policy</Text>
-            </Text>
+            <LegalFooter />
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -325,7 +336,7 @@ const styles = StyleSheet.create({
   sendOtpText: {
     fontFamily: FONTS.medium,
     fontSize: 14,
-    color: "#5B21B6",
+    color: AUTH_COLORS.purple,
   },
   sendOtpDisabled: {
     opacity: 0.4,
@@ -379,23 +390,12 @@ const styles = StyleSheet.create({
   resendLink: {
     fontFamily: FONTS.medium,
     fontSize: 14,
-    color: "#5B21B6",
+    color: AUTH_COLORS.purple,
     textDecorationLine: "underline",
   },
   termsContainer: {
     paddingHorizontal: 32,
     marginTop: "auto",
     paddingTop: 48,
-  },
-  termsText: {
-    fontFamily: FONTS.regular,
-    fontSize: 12,
-    color: "#999999",
-    textAlign: "center",
-    lineHeight: 18,
-  },
-  termsLink: {
-    fontFamily: FONTS.semiBold,
-    color: "#000000",
   },
 });

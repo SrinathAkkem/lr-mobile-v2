@@ -103,7 +103,7 @@ interface AuthContextValue {
   login: (mobile: string, otp: string) => Promise<{ ok: boolean; error?: string }>;
   sendOtp: (
     mobile: string,
-    options?: { purpose?: "login" | "profile_update" },
+    options?: { purpose?: "login" | "profile_update" | "register" },
   ) => Promise<{ ok: boolean; error?: string; devOtp?: string; smsSent?: boolean }>;
   logout: () => Promise<void>;
   refreshUser: (patch: Partial<User>) => Promise<void>;
@@ -174,7 +174,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function sendOtp(
     mobile: string,
-    options?: { purpose?: "login" | "profile_update" },
+    options?: { purpose?: "login" | "profile_update" | "register" },
   ) {
     // Normalize mobile to 10 digits (strip non-digits, remove country code if present)
     const normalized = mobile.replace(/\D/g, "");
@@ -294,7 +294,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const sendOtpStable = useCallback(
     (
       mobile: string,
-      options?: { purpose?: "login" | "profile_update" },
+      options?: { purpose?: "login" | "profile_update" | "register" },
     ) => sendOtp(mobile, options),
     [],
   );

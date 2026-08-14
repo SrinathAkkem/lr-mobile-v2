@@ -226,6 +226,21 @@ export function AdminDashboard() {
         </View>
       </View>
 
+      {user?.company?.status && user.company.status !== "active" ? (
+        <View
+          style={[
+            styles.pendingBanner,
+            user.company.status === "suspended" && styles.pendingBannerSuspended,
+          ]}
+        >
+          <Text style={styles.pendingBannerText}>
+            {user.company.status === "suspended"
+              ? "Your company account is suspended. Contact your admin for details."
+              : "Your company is pending approval. LR creation is disabled until a Rono admin approves your account."}
+          </Text>
+        </View>
+      ) : null}
+
       <View style={styles.content}>
         <View style={styles.contentBody}>
         {isFilterPanelOpen ? (
@@ -371,6 +386,21 @@ const styles = StyleSheet.create({
   },
   header: {
     zIndex: 2,
+  },
+  pendingBanner: {
+    backgroundColor: "#FDF3E4",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    zIndex: 3,
+  },
+  pendingBannerSuspended: {
+    backgroundColor: "#FBEAEA",
+  },
+  pendingBannerText: {
+    color: "#8A5A00",
+    fontFamily: FONTS.semiBold,
+    fontSize: FONT_SIZES.xs,
+    textAlign: "center",
   },
   headerInner: {
     paddingHorizontal: 24,

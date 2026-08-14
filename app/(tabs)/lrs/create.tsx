@@ -620,6 +620,38 @@ export default function CreateLRScreen() {
     );
   }
 
+  if (!editId && user?.company?.status && user.company.status !== "active") {
+    return (
+      <View style={styles.container}>
+        <StatusBar style="light" />
+        <View style={styles.statusBarFill}>
+          <SafeAreaView edges={["top"]} />
+        </View>
+        <View style={pendingStyles.wrap}>
+          <View style={pendingStyles.iconCircle}>
+            <TimeIcon size={32} color={COLORS.primary} />
+          </View>
+          <Text style={pendingStyles.title}>
+            {user.company.status === "suspended"
+              ? "Company account suspended"
+              : "Pending approval"}
+          </Text>
+          <Text style={pendingStyles.body}>
+            {user.company.status === "suspended"
+              ? "Your company's account has been suspended. Contact your admin for details."
+              : "Your company is pending approval by a Rono admin. LR creation will be enabled as soon as it's approved."}
+          </Text>
+          <TouchableOpacity
+            style={pendingStyles.button}
+            onPress={() => router.replace("/(tabs)" as any)}
+          >
+            <Text style={pendingStyles.buttonText}>Go to Dashboard</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+
   if (submittedLr) {
     return (
       <View style={styles.container}>
@@ -1142,6 +1174,50 @@ export default function CreateLRScreen() {
     </View>
   );
 }
+
+const pendingStyles = StyleSheet.create({
+  wrap: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 32,
+  },
+  iconCircle: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: `${COLORS.primary}1A`,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: FONT_SIZES.lg,
+    fontFamily: FONTS.bold,
+    color: COLORS.text,
+    marginBottom: 8,
+    textAlign: "center",
+  },
+  body: {
+    fontSize: FONT_SIZES.sm,
+    fontFamily: FONTS.regular,
+    color: COLORS.textSecondary,
+    textAlign: "center",
+    lineHeight: 20,
+    marginBottom: 24,
+  },
+  button: {
+    backgroundColor: COLORS.primary,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: BORDER_RADIUS.md,
+  },
+  buttonText: {
+    color: COLORS.white,
+    fontFamily: FONTS.bold,
+    fontSize: FONT_SIZES.sm,
+  },
+});
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: COLORS.white },
