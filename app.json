@@ -13,13 +13,13 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.ronohub.lr.v2",
-      "buildNumber": "3",
+      "buildNumber": "4",
       "infoPlist": {
         "CFBundleDisplayName": "Rono LR",
         "ITSAppUsesNonExemptEncryption": false,
-        "NSCameraUsageDescription": "This app needs access to your camera to take photos of goods for LR documentation.",
-        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to select photos of goods for LR documentation.",
-        "NSPhotoLibraryAddUsageDescription": "This app needs access to save photos to your library."
+        "NSCameraUsageDescription": "Rono LR requires camera access to snap real-time photos of freight and cargo items to attach directly to your Lorry Receipts.",
+        "NSPhotoLibraryUsageDescription": "Rono LR requires photo library access to let logistics operators select and upload saved images of goods for digital LR documentation.",
+        "NSPhotoLibraryAddUsageDescription": "Rono LR requires permission to save processed logistics photographs and delivery receipts directly to your device storage."
       }
     },
     "android": {
@@ -27,7 +27,7 @@
         "foregroundImage": "./assets/icon.png"
       },
       "package": "com.ronohub.lr.v2",
-      "versionCode": 3,
+      "versionCode": 4,
       "softwareKeyboardLayoutMode": "resize",
       "permissions": [
         "android.permission.CAMERA",
@@ -56,8 +56,8 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "The app needs access to your photos to upload goods images.",
-          "cameraPermission": "The app needs access to your camera to take photos of goods."
+          "photosPermission": "Rono LR requires photo library access to let logistics operators select and upload saved images of goods for digital LR documentation.",
+          "cameraPermission": "Rono LR requires camera access to snap real-time photos of freight and cargo items to attach directly to your Lorry Receipts."
         }
       ],
       [
